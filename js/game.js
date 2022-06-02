@@ -1,10 +1,17 @@
 /* global phaser */
 
-// Copyright (c) 2022 Rory Mackay All rights reserved
+// Copyright (c) 2020 Mr Coxall All rights reserved
+// Modified 2022 Rory Mackay
 //
 // Created by: Rory Mackay
 // Date: June 2022
 // This file contains the JS functions for the index.html file
+
+// import js file for splash scene
+import SplashScene from './splashScene.js'
+
+// Our game scene
+const splashScene = new SplashScene()
 
 // Game scene
 const config = {
@@ -27,4 +34,10 @@ const config = {
 }
 
 const game = new Phaser.Game(config)
-console.log(game)
+
+// load scenes
+// NOTE: remember any "key" is global and CAN NOT be reused!
+game.scene.add('splashScene', splashScene)
+
+// start title
+game.scene.start('splashScene')
