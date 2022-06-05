@@ -14,8 +14,8 @@ import SplashScene from './splashScene.js'
 import TitleScene from './titleScene.js'
 
 // Our game scenes
-const splashScene = new SplashScene()
-const titleScene = new TitleScene()
+const splashScene = new SplashScene
+const titleScene = new TitleScene
 
 // Game scene
 const config = {
