@@ -3,6 +3,4 @@
 
 [![Run on Repl.it](https://repl.it/badge/github/Rory-Mackay/ICS2O-Programming-Rory-Mackay/ICS2O-Space-Aliens)](https://repl.it/github/Rory-Mackay/ICS2O-Programming-Rory-Mackay/ICS2O-Space-Aliens)
 
-
-
 This site can be found at: [https://Rory-Mackay.github.io/ICS2O-Programming-Rory-Mackay/ICS2O-Space-Aliens](https://Rory-Mackay.github.io/ICS2O-Programming-Rory-Mackay/ICS2O-Space-Aliens)
