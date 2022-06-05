@@ -13,7 +13,7 @@ class SplashScene extends Phaser.Scene {
   }
 // set splash scene background colour
   init (data) {
-    this.cameras.main.setBackgroundColor('#ffffff')
+    this.cameras.main.setBackgroundColor('#007aff')
   }
 // log 'Splash Scene' in console and load in image file
   preload () {
