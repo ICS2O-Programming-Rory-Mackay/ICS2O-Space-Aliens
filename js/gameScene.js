@@ -22,10 +22,14 @@ class GameScene extends Phaser.Scene {
     console.log('Game Scene')
 
     // images
-    this.load.image('starBackground', )
+    this.load.image('basicCave', 'assets/basic-cave.png')
+    
   }
   
   create (data) {
+    this.background = this.add.image(0, 0, 'basicCave').setScale(2.25)
+    this.background.setOrigin(0, 0)
+
   }
 
   update (time, delta) {
