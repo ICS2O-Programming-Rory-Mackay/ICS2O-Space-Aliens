@@ -10,6 +10,8 @@
 class GameScene extends Phaser.Scene {
   constructor () {
     super({ key: 'gameScene' })
+    // creating variables
+    this.background = null
   }
 // set game scene background colour
   init (data) {
@@ -18,6 +20,9 @@ class GameScene extends Phaser.Scene {
 
   preload () {
     console.log('Game Scene')
+
+    // images
+    this.load.image('starBackground',)
   }
   
   create (data) {

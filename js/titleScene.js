@@ -22,7 +22,7 @@ class TitleScene extends Phaser.Scene {
   
   preload () {
     console.log('Title Scene')
-    this.load.image('titleSceneBackground', './assets/titleSceneImage.jpeg')
+    this.load.image('titleSceneBackground', './assets/titleSceneImage.webp')
   }
   
   create (data) {
@@ -30,7 +30,7 @@ class TitleScene extends Phaser.Scene {
     this.titleSceneBackgroundImage.x = 1920 / 2
     this.titleSceneBackgroundImage.y = 1080 / 2
   
-    this.titleSceneText = this.add.text(1920 / 2, 1080 / 2 + -20, 'Super Strawberries', this.titleSceneTextStyle).setOrigin(0.5)
+    this.titleSceneText = this.add.text(1920 / 2, 1080 / 2 + -20, 'Cheese Shooter', this.titleSceneTextStyle).setOrigin(0.5)
   }
   
   // switch to title scene on update
