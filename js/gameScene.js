@@ -38,9 +38,37 @@ class GameScene extends Phaser.Scene {
     // called 60 times a second
     // creating local variable
     const keyLeftObj = this.input.keyboard.addKey('LEFT')
+    const keyRightObj = this.input.keyboard.addKey('RIGHT')
+    const keyUpObj = this.input.keyboard.addKey('UP')
+    const keyDownObj = this.input.keyboard.addKey('DOWN')
+
     // if statement for left arrow pressed
     if (keyLeftObj.isDown === true) {
-      this.ship.x = this.ship.x - 1
+      this.ship.x = this.ship.x - 15
+      if (this.ship.x <0) {
+        this.ship.x = 1920
+      }
+    }
+    // if statement for right arrow pressed
+    if (keyRightObj.isDown === true) {
+      this.ship.x = this.ship.x + 15
+      if (this.ship.x > 1920) {
+        this.ship.x = 0
+      }
+    }
+    // if statement for up arrow pressed
+    if (keyUpObj.isDown === true) {
+      this.ship.y = this.ship.y - 15
+      if (this.ship.y < 0) {
+        this.ship.y = 10
+      }
+    }
+    // if statement for down arrow pressed
+    if (keyDownObj.isDown === true) {
+      this.ship.y = this.ship.y + 15
+      if (this.ship.y > 1080) {
+        this.ship.y = 1070
+      }
     }
   }
 }
