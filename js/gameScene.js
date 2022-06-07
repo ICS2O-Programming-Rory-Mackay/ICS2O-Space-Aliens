@@ -22,7 +22,7 @@ class GameScene extends Phaser.Scene {
     console.log('Game Scene')
 
     // images
-    this.load.image('starBackground',)
+    this.load.image('starBackground', )
   }
   
   create (data) {
