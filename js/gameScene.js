@@ -27,6 +27,8 @@ class GameScene extends Phaser.Scene {
     this.load.image('basicCave', 'assets/basic-cave.png')
     this.load.image('ship', 'assets/cannon.png')
     this.load.image('missile', 'assets/cheese-projectile.png')
+    //sound files
+    this.load.audio('laser', 'assets/cannon_sound.wav')
   }
   
   create (data) {
@@ -80,8 +82,9 @@ class GameScene extends Phaser.Scene {
       if (this.fireMissile === false) {
         // fire missile
         this.fireMissile = true
-        const aNewMissile = this.physics.add.sprite(this.ship.x, this.ship.y, 'missile').setScale(0.20)
+        const aNewMissile = this.physics.add.sprite(this.ship.x, this.ship.y -120, 'missile').setScale(0.20)
         this.missileGroup.add(aNewMissile)
+        this.sound.play('laser')
       }
     }
     // allow multiple missiles to be fired
