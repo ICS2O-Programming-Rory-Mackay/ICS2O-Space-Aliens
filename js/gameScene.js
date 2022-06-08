@@ -8,6 +8,11 @@
 // This is a Game Scene
 
 class GameScene extends Phaser.Scene {
+
+  // create an alien
+  createAlien() {
+    const anAlien = this.physics.add.sprite(alienXLocation, -100, 'alien')
+  }
   constructor () {
     super({ key: 'gameScene' })
     // creating variables
@@ -27,6 +32,7 @@ class GameScene extends Phaser.Scene {
     this.load.image('basicCave', 'assets/basic-cave.png')
     this.load.image('ship', 'assets/cannon.png')
     this.load.image('missile', 'assets/cheese-projectile.png')
+    this.load.image('alien', 'assets/hungry_ant.png')
     //sound files
     this.load.audio('laser', 'assets/cannon_sound.wav')
   }
@@ -38,6 +44,10 @@ class GameScene extends Phaser.Scene {
     this.ship = this.physics.add.sprite(1920 / 2, 1080 - 100, 'ship').setScale(0.75)
     // create a group for the missiles and add physics
     this.missileGroup = this.physics.add.group()
+
+    // create a group for the ants and add physics
+    this.alienGroup = this.add.group()
+    this.createAlien()
   }
 
   update (time, delta) {
@@ -91,6 +101,13 @@ class GameScene extends Phaser.Scene {
     if (keySpaceObj.isUp === true) {
       this.fireMissile = false
     }   
+    // allow missiles to travel up screen
+    this.missileGroup.children.each(function (item) {
+      item.y = item.y - 15
+      if (item.y < 0) {
+        item.destroy()
+      }
+    })
   }
 }
 
