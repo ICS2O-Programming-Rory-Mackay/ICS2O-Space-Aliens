@@ -18,7 +18,7 @@ class GameScene extends Phaser.Scene {
     // add minus sign in 50% of cases
     alienXVelocity *= Math.round(Math.random()) ? 1 : -1
     // physics for sprite
-    const anAlien = this.physics.add.sprite(alienXLocation, -100, 'alien').setScale(0.38)
+    const anAlien = this.physics.add.sprite(alienXLocation, -100, 'alien').setScale(0.31)
     // alien spaceship move in difefrent directions
     anAlien.body.velocity.y = 200
     anAlien.body.velocity.x = alienXVelocity
@@ -60,6 +60,7 @@ class GameScene extends Phaser.Scene {
     //sound files
     this.load.audio('laser', 'assets/cannon_sound.wav')
     this.load.audio('explosion', 'assets/crunch.mp3')
+    this.load.audio('death', 'assets/death.wav')
   }
   
   create (data) {
@@ -93,7 +94,7 @@ class GameScene extends Phaser.Scene {
       // collisions between cannon and ants
       this.physics.add.collider(this.ship, this.alienGroup, function (shipCollide, alienCollide) {
         // explosion sound on contact
-        this.sound.play('explosion')
+        this.sound.play('death')
         // pause physics to stop new enemies fro spawning
         this.physics.pause()
         // destroy cannon on contact with ant
@@ -150,7 +151,7 @@ class GameScene extends Phaser.Scene {
       if (this.fireMissile === false) {
         // fire missile
         this.fireMissile = true
-        const aNewMissile = this.physics.add.sprite(this.ship.x, this.ship.y -120, 'missile').setScale(0.20)
+        const aNewMissile = this.physics.add.sprite(this.ship.x, this.ship.y -120, 'missile').setScale(0.15)
         this.missileGroup.add(aNewMissile)
         this.sound.play('laser')
       }
