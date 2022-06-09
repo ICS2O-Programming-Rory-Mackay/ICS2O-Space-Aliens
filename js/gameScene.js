@@ -33,8 +33,10 @@ class GameScene extends Phaser.Scene {
     this.ship = null
     // ship1 variable
     this.ship1 = null
-    // projectile variable
+    // cannon projectile variable
     this.fireMissile = false
+    // cannon1 projectile variable
+    this.fireMissile1 = false
     // score variable
     this.score = 0
     // score text variable
@@ -145,6 +147,8 @@ class GameScene extends Phaser.Scene {
     const keySObj = this.input.keyboard.addKey('S')
     // creating local variable for spacebar
     const keySpaceObj = this.input.keyboard.addKey('SPACE')
+    // creating local variable for shift
+    const keyShiftObj = this.input.keyboard.addKey('SHIFT')
     // if statements for arrow keys and cannon
     // if statement for left arrow pressed
     if (keyLeftObj.isDown === true) {
@@ -203,6 +207,7 @@ class GameScene extends Phaser.Scene {
         this.ship1.y = 1070
       }
     }
+    // firing key for cannon
     // if statement for spacebar pressed
     if (keySpaceObj.isDown === true) {
       if (this.fireMissile === false) {
@@ -216,6 +221,28 @@ class GameScene extends Phaser.Scene {
     // allow multiple missiles to be fired
     if (keySpaceObj.isUp === true) {
       this.fireMissile = false
+    }   
+    // allow missiles to travel up screen
+    this.missileGroup.children.each(function (item) {
+      item.y = item.y - 15
+      if (item.y < 0) {
+        item.destroy()
+      }
+    })
+    // firing key for cannon1
+    // if statement for shift pressed
+    if (keyShiftObj.isDown === true) {
+      if (this.fireMissile1 === false) {
+        // fire missile
+        this.fireMissile1 = true
+        const aNewMissile = this.physics.add.sprite(this.ship1.x, this.ship1.y -120, 'missile').setScale(0.15)
+        this.missileGroup.add(aNewMissile)
+        this.sound.play('laser')
+      }
+    }
+    // allow multiple missiles to be fired
+    if (keyShiftObj.isUp === true) {
+      this.fireMissile1 = false
     }   
     // allow missiles to travel up screen
     this.missileGroup.children.each(function (item) {
