@@ -111,13 +111,19 @@ class GameScene extends Phaser.Scene {
 
   update (time, delta) {
     // called 60 times a second
-    // creating local variable
+    // creating local variable for arrow keys
     const keyLeftObj = this.input.keyboard.addKey('LEFT')
     const keyRightObj = this.input.keyboard.addKey('RIGHT')
     const keyUpObj = this.input.keyboard.addKey('UP')
     const keyDownObj = this.input.keyboard.addKey('DOWN')
+    // creating local variable for WASD
+    const keyAObj = this.input.keyboard.addKey('A')
+    const keyDObj = this.input.keyboard.addKey('D')
+    const keyWObj = this.input.keyboard.addKey('W')
+    const keySObj = this.input.keyboard.addKey('S')
+    // creating local variable for spacebar
     const keySpaceObj = this.input.keyboard.addKey('SPACE')
-
+    // if statements for arrow keys
     // if statement for left arrow pressed
     if (keyLeftObj.isDown === true) {
       this.ship.x -= 15
@@ -141,6 +147,35 @@ class GameScene extends Phaser.Scene {
     }
     // if statement for down arrow pressed
     if (keyDownObj.isDown === true) {
+      this.ship.y += 15
+      if (this.ship.y > 1080) {
+        this.ship.y = 1070
+      }
+    }
+    // if statements for WASD
+    // if statement for left arrow pressed
+    if (keyAObj.isDown === true) {
+      this.ship.x -= 15
+      if (this.ship.x <0) {
+        this.ship.x = 1920
+      }
+    }
+    // if statement for right arrow pressed
+    if (keyDObj.isDown === true) {
+      this.ship.x += 15
+      if (this.ship.x > 1920) {
+        this.ship.x = 0
+      }
+    }
+    // if statement for up arrow pressed
+    if (keyWObj.isDown === true) {
+      this.ship.y -= 15
+      if (this.ship.y < 0) {
+        this.ship.y = 10
+      }
+    }
+    // if statement for down arrow pressed
+    if (keySObj.isDown === true) {
       this.ship.y += 15
       if (this.ship.y > 1080) {
         this.ship.y = 1070
