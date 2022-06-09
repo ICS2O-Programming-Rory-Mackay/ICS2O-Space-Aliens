@@ -27,9 +27,22 @@ class GameScene extends Phaser.Scene {
   constructor () {
     super({ key: 'gameScene' })
     // creating variables
+    // backround variable
     this.background = null
+    // ship variable
     this.ship = null
+    // projectile variable
     this.fireMissile = false
+    // score variable
+    this.score = 0
+    // score text variable
+    this.scoreText = null
+    // score text variable styling
+    this.scoreTextStyle = { font: '65px Arial', fill: '#ffffff', align: 'center' }
+    // game over text variable
+    this.gameOverText = null
+    // game over text variable styling
+    this.gameOverTextStyle = { font: '65px Arial', fill: '#ff0000', align: 'center' }
   }
 // set game scene background colour
   init (data) {
@@ -52,6 +65,8 @@ class GameScene extends Phaser.Scene {
   create (data) {
     this.background = this.add.image(0, 0, 'basicCave').setScale(2.25)
     this.background.setOrigin(0, 0)
+    // show score on screen
+    this.scoreText = this.add.text(10, 10, 'Score: ' + this.score.toString(), this.scoreTextStyle)
     // physics for ship
     this.ship = this.physics.add.sprite(1920 / 2, 1080 - 100, 'ship').setScale(0.75)
     // create a group for the missiles and add physics
@@ -67,9 +82,29 @@ class GameScene extends Phaser.Scene {
       missileCollide.destroy()
       // explosion sound on contact
       this.sound.play('explosion')
+      // increase score on contact
+      this.score = this.score + 5
+      this.scoreText.setText('Score : ' + this.score.toString()) 
       // create two more ants for each ant hit
       this.createAlien()
       this.createAlien()
+      }.bind(this))
+      
+      // collisions between cannon and ants
+      this.physics.add.collider(this.ship, this.alienGroup, function (shipCollide, alienCollide) {
+        // explosion sound on contact
+        this.sound.play('explosion')
+        // pause physics to stop new enemies fro spawning
+        this.physics.pause()
+        // destroy cannon on contact with ant
+        alienCollide.destroy()
+        shipCollide.destroy()
+        // set score to 0 score on contact
+        this.score = this.score * 0
+        // display game over text
+        this.gameOverText = this.add.text(1920 / 2, 1080 / 2, 'Game Over!\nClick to play again.', this.gameOverTextStyle).setOrigin(0.5)
+        this.gameOverText.setInteractive({ useHandCursor: true })
+        this.gameOverText.on('pointerdown', () => this.scene.start('gameScene'))
       }.bind(this))
     }
 
