@@ -11,7 +11,18 @@ class GameScene extends Phaser.Scene {
 
   // create an alien
   createAlien() {
-    const anAlien = this.physics.add.sprite(alienXLocation, -100, 'alien')
+    // get a number between 1 and 1920
+    const alienXLocation = Math.floor(Math.random() * 1920) + 1
+    // get a number between 1 and 50
+    let alienXVelocity = Math.floor(Math.random() * 50) + 1
+    // add minus sign in 50% of cases
+    alienXVelocity *= Math.round(Math.random()) ? 1 : -1
+    // physics for sprite
+    const anAlien = this.physics.add.sprite(alienXLocation, -100, 'alien').setScale(0.38)
+    // alien spaceship move in difefrent directions
+    anAlien.body.velocity.y = 200
+    anAlien.body.velocity.x = alienXVelocity
+    this.alienGroup.add(anAlien)
   }
   constructor () {
     super({ key: 'gameScene' })
@@ -35,6 +46,7 @@ class GameScene extends Phaser.Scene {
     this.load.image('alien', 'assets/hungry_ant.png')
     //sound files
     this.load.audio('laser', 'assets/cannon_sound.wav')
+    this.load.audio('explosion', 'assets/crunch.mp3')
   }
   
   create (data) {
@@ -45,10 +57,21 @@ class GameScene extends Phaser.Scene {
     // create a group for the missiles and add physics
     this.missileGroup = this.physics.add.group()
 
-    // create a group for the ants and add physics
+    // create a group for the ants
     this.alienGroup = this.add.group()
     this.createAlien()
-  }
+
+    // collisions between cheese projectiles and ants
+    this.physics.add.collider(this.missileGroup, this.alienGroup, function (missileCollide, alienCollide) {
+      alienCollide.destroy()
+      missileCollide.destroy()
+      // explosion sound on contact
+      this.sound.play('explosion')
+      // create two more ants for each ant hit
+      this.createAlien()
+      this.createAlien()
+      }.bind(this))
+    }
 
   update (time, delta) {
     // called 60 times a second
