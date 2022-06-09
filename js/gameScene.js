@@ -31,6 +31,8 @@ class GameScene extends Phaser.Scene {
     this.background = null
     // ship variable
     this.ship = null
+    // ship1 variable
+    this.ship1 = null
     // projectile variable
     this.fireMissile = false
     // score variable
@@ -55,6 +57,7 @@ class GameScene extends Phaser.Scene {
     // images
     this.load.image('basicCave', 'assets/basic-cave.png')
     this.load.image('ship', 'assets/cannon.png')
+    this.load.image('ship1', 'assets/cannon1.png')
     this.load.image('missile', 'assets/cheese-projectile.png')
     this.load.image('alien', 'assets/hungry_ant.png')
     //sound files
@@ -70,6 +73,8 @@ class GameScene extends Phaser.Scene {
     this.scoreText = this.add.text(10, 10, 'Score: ' + this.score.toString(), this.scoreTextStyle)
     // physics for ship
     this.ship = this.physics.add.sprite(1920 / 2, 1080 - 100, 'ship').setScale(0.75)
+    // physics for ship1
+    this.ship1 = this.physics.add.sprite(1920 / 2, 1080 - 100, 'ship1').setScale(0.75)
     // create a group for the missiles and add physics
     this.missileGroup = this.physics.add.group()
 
@@ -107,7 +112,24 @@ class GameScene extends Phaser.Scene {
         this.gameOverText.setInteractive({ useHandCursor: true })
         this.gameOverText.on('pointerdown', () => this.scene.start('gameScene'))
       }.bind(this))
+    // collisions between cannon1 and ants
+      this.physics.add.collider(this.ship1, this.alienGroup, function (ship1Collide, alienCollide) {
+        // explosion sound on contact
+        this.sound.play('death')
+        // pause physics to stop new enemies fro spawning
+        this.physics.pause()
+        // destroy cannon on contact with ant
+        alienCollide.destroy()
+        ship1Collide.destroy()
+        // set score to 0 score on contact
+        this.score = this.score * 0
+        // display game over text
+        this.gameOverText = this.add.text(1920 / 2, 1080 / 2, 'Game Over!\nClick to play again.', this.gameOverTextStyle).setOrigin(0.5)
+        this.gameOverText.setInteractive({ useHandCursor: true })
+        this.gameOverText.on('pointerdown', () => this.scene.start('gameScene'))
+      }.bind(this))
     }
+
 
   update (time, delta) {
     // called 60 times a second
@@ -123,7 +145,7 @@ class GameScene extends Phaser.Scene {
     const keySObj = this.input.keyboard.addKey('S')
     // creating local variable for spacebar
     const keySpaceObj = this.input.keyboard.addKey('SPACE')
-    // if statements for arrow keys
+    // if statements for arrow keys and cannon
     // if statement for left arrow pressed
     if (keyLeftObj.isDown === true) {
       this.ship.x -= 15
@@ -152,33 +174,33 @@ class GameScene extends Phaser.Scene {
         this.ship.y = 1070
       }
     }
-    // if statements for WASD
-    // if statement for left arrow pressed
+    // if statements for WASD and cannon1
+    // if statement for A pressed
     if (keyAObj.isDown === true) {
-      this.ship.x -= 15
-      if (this.ship.x <0) {
-        this.ship.x = 1920
+      this.ship1.x -= 15
+      if (this.ship1.x <0) {
+        this.ship1.x = 1920
       }
     }
-    // if statement for right arrow pressed
+    // if statement for D pressed
     if (keyDObj.isDown === true) {
-      this.ship.x += 15
-      if (this.ship.x > 1920) {
-        this.ship.x = 0
+      this.ship1.x += 15
+      if (this.ship1.x > 1920) {
+        this.ship1.x = 0
       }
     }
-    // if statement for up arrow pressed
+    // if statement for W pressed
     if (keyWObj.isDown === true) {
-      this.ship.y -= 15
-      if (this.ship.y < 0) {
-        this.ship.y = 10
+      this.ship1.y -= 15
+      if (this.ship1.y < 0) {
+        this.ship1.y = 10
       }
     }
-    // if statement for down arrow pressed
+    // if statement for S pressed
     if (keySObj.isDown === true) {
-      this.ship.y += 15
-      if (this.ship.y > 1080) {
-        this.ship.y = 1070
+      this.ship1.y += 15
+      if (this.ship1.y > 1080) {
+        this.ship1.y = 1070
       }
     }
     // if statement for spacebar pressed
