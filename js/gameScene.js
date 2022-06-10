@@ -66,6 +66,7 @@ class GameScene extends Phaser.Scene {
     this.load.audio('laser', 'assets/cannon_sound.wav')
     this.load.audio('explosion', 'assets/crunch.mp3')
     this.load.audio('death', 'assets/death.wav')
+    this.load.audio('button', 'assets/buttonPress.mp3')
   }
   
   create (data) {
@@ -100,7 +101,7 @@ class GameScene extends Phaser.Scene {
       
       // collisions between cannon and ants
       this.physics.add.collider(this.ship, this.alienGroup, function (shipCollide, alienCollide) {
-        // explosion sound on contact
+        // death sound on contact
         this.sound.play('death')
         // pause physics to stop new enemies fro spawning
         this.physics.pause()
@@ -116,7 +117,7 @@ class GameScene extends Phaser.Scene {
       }.bind(this))
     // collisions between cannon1 and ants
       this.physics.add.collider(this.ship1, this.alienGroup, function (ship1Collide, alienCollide) {
-        // explosion sound on contact
+        // death sound on contact
         this.sound.play('death')
         // pause physics to stop new enemies fro spawning
         this.physics.pause()

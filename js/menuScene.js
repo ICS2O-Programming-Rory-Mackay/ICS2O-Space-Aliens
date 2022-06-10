@@ -27,6 +27,7 @@ class MenuScene extends Phaser.Scene {
     this.load.image('menuSceneBackground', 'assets/cavern.png')
     this.load.image('startButton', 'assets/start.png')
     this.load.image('instructionButton', 'assets/instruction.png')
+    this.load.audio('button', 'assets/buttonPress.mp3')
   }
   
   create (data) {
@@ -49,10 +50,12 @@ class MenuScene extends Phaser.Scene {
   // switch to gameScene on start button clicked
   clickButton () {
     this.scene.start('gameScene')
+    this.sound.play('button')
   }
   // switch to instrutionScene on ? button clicked
   clickButton1 () {
     this.scene.start('instructionScene')
+    this.sound.play('button')
   }
 }
 
