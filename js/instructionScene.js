@@ -5,7 +5,7 @@
 //
 // Created by: Rory Mackay
 // Date: June 2022
-// This is an instruction
+// This is an instruction scene
 
 class InstructionScene extends Phaser.Scene {
   constructor () {
