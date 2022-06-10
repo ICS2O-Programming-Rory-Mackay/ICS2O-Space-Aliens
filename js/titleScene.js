@@ -12,7 +12,7 @@ class TitleScene extends Phaser.Scene {
     super({ key: 'titleScene' })
     this.titleSceneBackgroundImage = null
     this.titleSceneText = null
-    this.titleSceneTextStyle = { font: '122px Verdana', fontStyle: 'bold', fill: '#006400', align: 'center' }
+    this.titleSceneTextStyle = { font: '122px Verdana', fontStyle: 'bold', fill: '#006400', align: 'center', backgroundColor: '#C4A484' }
   }
   
 // set title scene background colour

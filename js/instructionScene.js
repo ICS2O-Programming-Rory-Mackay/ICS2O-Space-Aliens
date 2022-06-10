@@ -12,10 +12,14 @@ class InstructionScene extends Phaser.Scene {
     super({ key: 'instructionScene' })
     // create variable for instruction scene backround image
     this.instructionSceneBackgroundImage = null
-    // create variable for instruction scene text
-    this.instructionSceneText = null
-    // style instruction scene text
-    this.instructionSceneTextStyle = { font: '122px Verdana', fontStyle: 'bold', fill: '#006400', align: 'center' }
+    // create variable for instruction scene title text
+    this.instructionSceneTitleText = null
+    // create variable for instruction scene body text
+    this.instructionSceneBodyText = null
+    // style instruction scene title text
+    this.instructionSceneTitleTextStyle = { font: '122px Verdana', fontStyle: 'bold', fill: '#0000FF', align: 'center' }
+    // style instruction scene body text
+    this.instructionSceneBodyTextStyle = { font: '40px Verdana', backgroundColor: '#C4A484', fontStyle: 'bold', fill: '#0047AB', align: 'center' }
     // create variable for back button
     this.backButton = null
   }
@@ -37,8 +41,10 @@ class InstructionScene extends Phaser.Scene {
     // orient instruction scene backround image
     this.instructionSceneBackgroundImage.x = 1920 / 2
     this.instructionSceneBackgroundImage.y = 1080 / 2
-    // create instruction scene text
-    this.instructionSceneText = this.add.text(1920 / 2, 1080 / 2 + +22, 'Cheese Shooter', this.instructionSceneTextStyle).setOrigin(0.5)
+    // create instruction scene title text
+    this.instructionSceneTitleText = this.add.text(1920 / 2, 1080 / 2 + -170, 'Instructions', this.instructionSceneTitleTextStyle).setOrigin(0.5)
+    // create instruction scene body text
+    this.instructionSceneBodyText = this.add.text(1920 / 2, 1080 / 2 + 60, 'Welcome to Cheese Shooter™!\nThis cave is filled to the brim with giant ants that are hungry for cheese.\nLuckily, you and your partner brought your cheese cannons along.\nShoot the cheese into the incoming ants mouth before they eat you instead!\n\nPlayer 1 controls (Blue): Arrow keys to move and spacebar to shoot\nPlayer 2 controls (Red): WASD to move and shift to shoot', this.instructionSceneBodyTextStyle).setOrigin(0.5)
     // create back button
     this.backButton = this.add.sprite(350, (1080 / 6) + 1, 'backButton').setScale(0.37)
     // execute clickButtonBack function on button clicked
