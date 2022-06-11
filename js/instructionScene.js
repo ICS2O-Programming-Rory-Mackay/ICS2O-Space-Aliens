@@ -30,9 +30,13 @@ class InstructionScene extends Phaser.Scene {
   }
   
   preload () {
+    // log 'Instruction Scene' to console
     console.log('Instruction Scene')
+    // load background image
     this.load.image('instructionSceneBackground', './assets/instructionSceneImage.jpg')
+    // load back button image
     this.load.image('backButton', './assets/backButton.png')
+    // load button audio
     this.load.audio('button', 'assets/buttonPress.mp3')
   }
   
@@ -44,7 +48,7 @@ class InstructionScene extends Phaser.Scene {
     this.instructionSceneBackgroundImage.y = 1080 / 2
     // create instruction scene title text
     this.instructionSceneTitleText = this.add.text(1920 / 2, 1080 / 2 + -170, 'Instructions', this.instructionSceneTitleTextStyle).setOrigin(0.5)
-    // create instruction scene body text
+    // create and orient instruction scene body text
     this.instructionSceneBodyText = this.add.text(1920 / 2, 1080 / 2 + 60, 'Welcome to Cheese Shooter™!\nThis cave is filled to the brim with giant ants that are hungry for cheese.\nLuckily, you and your partner brought your cheese cannons along.\nShoot the cheese into the incoming ants mouth before they eat you instead!\n\nPlayer 1 controls (Blue): Arrow keys to move and spacebar to shoot\nPlayer 2 controls (Red): WASD to move and shift to shoot', this.instructionSceneBodyTextStyle).setOrigin(0.5)
     // create back button
     this.backButton = this.add.sprite(350, (1080 / 6) + 1, 'backButton').setScale(0.37)
@@ -56,7 +60,7 @@ class InstructionScene extends Phaser.Scene {
   // update time
   update (time, delta) {
   }
-  // switch to menuScene on back button clicked
+  // switch to menuScene and play button sound on back button clicked
   clickButtonBack () {
     this.sound.play('button')
     this.scene.start('menuScene')

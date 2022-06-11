@@ -76,13 +76,14 @@ class GameScene extends Phaser.Scene {
   }
   
   create (data) {
+    // create, scale, and orient background image
     this.background = this.add.image(0, 0, 'basicCave').setScale(2.25)
     this.background.setOrigin(0, 0)
     // show score on screen
     this.scoreText = this.add.text(10, 10, 'Score: ' + this.score.toString(), this.scoreTextStyle)
-    // physics for ship
+    // physics and scaling for ship
     this.ship = this.physics.add.sprite(1920 / 2, 1080 - 100, 'ship').setScale(0.75)
-    // physics for ship1
+    // physics and scaling for ship1
     this.ship1 = this.physics.add.sprite(1920 / 2, 1080 - 100, 'ship1').setScale(0.75)
     // create a group for the missiles and add physics
     this.missileGroup = this.physics.add.group()
@@ -93,6 +94,7 @@ class GameScene extends Phaser.Scene {
 
     // collisions between cheese projectiles and ants
     this.physics.add.collider(this.missileGroup, this.alienGroup, function (missileCollide, alienCollide) {
+      // destroy missile and alien on contact
       alienCollide.destroy()
       missileCollide.destroy()
       // explosion sound on contact
@@ -103,12 +105,14 @@ class GameScene extends Phaser.Scene {
       // create two more ants for each ant hit
       this.createAlien()
       this.createAlien()
-      // end game if 100 points is reached
+      // end game if 50 points is reached
     if (this.score >= 50) {
       // pause physics to stop new enemies from spawning
       this.physics.pause()
       // play win sound
       this.sound.play('win')
+      // set score back to 0
+      this.score = this.score * 0
       // display and style win text
       this.gameWinText = this.add.text(1920 / 2, 1080 / 2, 'You won!\nClick to play again.', this.gameWinTextStyle).setOrigin(0.5)
       // make game win text clickable to take you back to gameScene
@@ -128,8 +132,9 @@ class GameScene extends Phaser.Scene {
         shipCollide.destroy()
         // set score to 0 score on contact
         this.score = this.score * 0
-        // display game over text
+        // display and orient game over text
         this.gameOverText = this.add.text(1920 / 2, 1080 / 2, 'Game Over!\nClick to play again.', this.gameOverTextStyle).setOrigin(0.5)
+        // make gameOverText interactive
         this.gameOverText.setInteractive({ useHandCursor: true })
         this.gameOverText.on('pointerdown', () => this.scene.start('gameScene'))
       }.bind(this))
@@ -144,8 +149,9 @@ class GameScene extends Phaser.Scene {
         ship1Collide.destroy()
         // set score to 0 score on contact
         this.score = this.score * 0
-        // display game over text
+        // display and orient game over text
         this.gameOverText = this.add.text(1920 / 2, 1080 / 2, 'Game Over!\nClick to play again.', this.gameOverTextStyle).setOrigin(0.5)
+        // make gameOverText interactive 
         this.gameOverText.setInteractive({ useHandCursor: true })
         this.gameOverText.on('pointerdown', () => this.scene.start('gameScene'))
       }.bind(this))
@@ -153,8 +159,10 @@ class GameScene extends Phaser.Scene {
 
 
   update (time, delta) {
-    const audioObj = new Audio("/assets/backgroundMusic.mp3")
-    audioObj.play()
+    // play backround music on update (commented out because it slowed down the game too much)
+    // const audioObj = new Audio("/assets/backgroundMusic.mp3")
+    // audioObj.play()
+    
     // called 60 times a second
     // creating local variable for arrow keys
     const keyLeftObj = this.input.keyboard.addKey('LEFT')
