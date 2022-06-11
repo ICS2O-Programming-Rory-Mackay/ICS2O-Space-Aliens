@@ -47,6 +47,11 @@ class GameScene extends Phaser.Scene {
     this.gameOverText = null
     // game over text variable styling
     this.gameOverTextStyle = { font: '65px Arial', fill: '#ff0000', align: 'center' }
+    // game win text variable
+    this.gameWinText = null
+    // game over text variable styling
+    this.gameWinTextStyle = { font: '65px Arial', fill: '#ff0000', align: 'center' }
+
   }
 // set game scene background colour
   init (data) {
@@ -97,13 +102,23 @@ class GameScene extends Phaser.Scene {
       // create two more ants for each ant hit
       this.createAlien()
       this.createAlien()
+      // end game if 100 points is reached
+    if (this.score >= 50) {
+      // pause physics to stop new enemies from spawning
+      this.physics.pause()
+      // display and style win text
+      this.gameWinText = this.add.text(1920 / 2, 1080 / 2, 'You won!\nClick to play again.', this.gameWinTextStyle).setOrigin(0.5)
+      // make game win text clickable to take you back to gameScene
+      this.gameWinText.setInteractive({ useHandCursor: true })
+      this.gameWinText.on('pointerdown', () => this.scene.start('gameScene')) 
+    }
       }.bind(this))
-      
+    
       // collisions between cannon and ants
       this.physics.add.collider(this.ship, this.alienGroup, function (shipCollide, alienCollide) {
         // death sound on contact
         this.sound.play('death')
-        // pause physics to stop new enemies fro spawning
+        // pause physics to stop new enemies from spawning
         this.physics.pause()
         // destroy cannon on contact with ant
         alienCollide.destroy()
