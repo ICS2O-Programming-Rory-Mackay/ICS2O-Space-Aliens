@@ -72,6 +72,7 @@ class GameScene extends Phaser.Scene {
     this.load.audio('explosion', 'assets/crunch.mp3')
     this.load.audio('death', 'assets/death.wav')
     this.load.audio('button', 'assets/buttonPress.mp3')
+    this.load.audio('win', 'assets/win.mp3')
   }
   
   create (data) {
@@ -106,6 +107,8 @@ class GameScene extends Phaser.Scene {
     if (this.score >= 50) {
       // pause physics to stop new enemies from spawning
       this.physics.pause()
+      // play win sound
+      this.sound.play('win')
       // display and style win text
       this.gameWinText = this.add.text(1920 / 2, 1080 / 2, 'You won!\nClick to play again.', this.gameWinTextStyle).setOrigin(0.5)
       // make game win text clickable to take you back to gameScene
