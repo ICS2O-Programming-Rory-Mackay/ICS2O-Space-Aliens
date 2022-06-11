@@ -150,6 +150,8 @@ class GameScene extends Phaser.Scene {
 
 
   update (time, delta) {
+    const audioObj = new Audio("/assets/backgroundMusic.mp3")
+    audioObj.play()
     // called 60 times a second
     // creating local variable for arrow keys
     const keyLeftObj = this.input.keyboard.addKey('LEFT')
