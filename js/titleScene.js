@@ -26,7 +26,7 @@ class TitleScene extends Phaser.Scene {
     // log 'Title Scene' to console
     console.log('Title Scene')
     // load background image
-    this.load.image('titleSceneBackground', './assets/titleSceneImage.webp')
+    this.load.image('titleSceneBackground', './images/titleSceneImage.webp')
   }
   
   create (data) {

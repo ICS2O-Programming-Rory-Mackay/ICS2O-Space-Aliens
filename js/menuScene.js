@@ -23,11 +23,14 @@ class MenuScene extends Phaser.Scene {
   }
 
   preload () {
+    // log 'Menu Scene' in comsole
     console.log('Menu Scene')
-    this.load.image('menuSceneBackground', 'assets/cavern.png')
-    this.load.image('startButton', 'assets/start.png')
-    this.load.image('instructionButton', 'assets/instruction.png')
-    this.load.audio('button', 'assets/buttonPress.mp3')
+    // load images
+    this.load.image('menuSceneBackground', 'images/cavern.png')
+    this.load.image('startButton', 'images/start.png')
+    this.load.image('instructionButton', 'images/instruction.png')
+    // load sounds
+    this.load.audio('button', 'sounds/buttonPress.mp3')
   }
   
   create (data) {

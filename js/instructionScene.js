@@ -33,11 +33,11 @@ class InstructionScene extends Phaser.Scene {
     // log 'Instruction Scene' to console
     console.log('Instruction Scene')
     // load background image
-    this.load.image('instructionSceneBackground', './assets/instructionSceneImage.jpg')
+    this.load.image('instructionSceneBackground', './images/instructionSceneImage.jpg')
     // load back button image
-    this.load.image('backButton', './assets/backButton.png')
+    this.load.image('backButton', './images/backButton.png')
     // load button audio
-    this.load.audio('button', 'assets/buttonPress.mp3')
+    this.load.audio('button', 'sounds/buttonPress.mp3')
   }
   
   create (data) {

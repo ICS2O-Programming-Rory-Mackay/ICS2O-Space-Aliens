@@ -62,17 +62,17 @@ class GameScene extends Phaser.Scene {
     console.log('Game Scene')
 
     // images
-    this.load.image('basicCave', 'assets/basic-cave.png')
-    this.load.image('ship', 'assets/cannon.png')
-    this.load.image('ship1', 'assets/cannon1.png')
-    this.load.image('missile', 'assets/cheese-projectile.png')
-    this.load.image('alien', 'assets/hungry_ant.png')
+    this.load.image('basicCave', 'images/basic-cave.png')
+    this.load.image('ship', 'images/cannon.png')
+    this.load.image('ship1', 'images/cannon1.png')
+    this.load.image('missile', 'images/cheese-projectile.png')
+    this.load.image('alien', 'images/hungry_ant.png')
     //sound files
-    this.load.audio('laser', 'assets/cannon_sound.wav')
-    this.load.audio('explosion', 'assets/crunch.mp3')
-    this.load.audio('death', 'assets/death.wav')
-    this.load.audio('button', 'assets/buttonPress.mp3')
-    this.load.audio('win', 'assets/win.mp3')
+    this.load.audio('laser', 'sounds/cannon_sound.wav')
+    this.load.audio('explosion', 'sounds/crunch.mp3')
+    this.load.audio('death', 'sounds/death.wav')
+    this.load.audio('button', 'sounds/buttonPress.mp3')
+    this.load.audio('win', 'sounds/win.mp3')
   }
   
   create (data) {
@@ -115,7 +115,7 @@ class GameScene extends Phaser.Scene {
       this.gameWinText = this.add.text(1920 / 2, 1080 / 2, 'You won!\nClick to play again.', this.gameWinTextStyle).setOrigin(0.5)
       // make game win text clickable to take you back to gameScene
       this.gameWinText.setInteractive({ useHandCursor: true })
-      this.gameWinText.on('pointerdown', () => this.scene.start('gameScene', this.score = 0))
+      this.gameWinText.on('pointerdown', () => this.scene.start('gameScene', this.score = 0, this.sound.play('button')))
     }
       }.bind(this))
     
@@ -128,13 +128,11 @@ class GameScene extends Phaser.Scene {
         // destroy cannon on contact with ant
         alienCollide.destroy()
         shipCollide.destroy()
-        // set score to 0 score on contact
-        this.score = this.score * 0
         // display and orient game over text
         this.gameOverText = this.add.text(1920 / 2, 1080 / 2, 'Game Over!\nClick to play again.', this.gameOverTextStyle).setOrigin(0.5)
         // make gameOverText interactive
         this.gameOverText.setInteractive({ useHandCursor: true })
-        this.gameOverText.on('pointerdown', () => this.scene.start('gameScene'))
+        this.gameOverText.on('pointerdown', () => this.scene.start('gameScene', this.score = 0, this.sound.play('button')))
       }.bind(this))
     // collisions between cannon1 and ants
       this.physics.add.collider(this.ship1, this.alienGroup, function (ship1Collide, alienCollide) {
@@ -145,20 +143,18 @@ class GameScene extends Phaser.Scene {
         // destroy cannon on contact with ant
         alienCollide.destroy()
         ship1Collide.destroy()
-        // set score to 0 score on contact
-        this.score = this.score * 0
         // display and orient game over text
         this.gameOverText = this.add.text(1920 / 2, 1080 / 2, 'Game Over!\nClick to play again.', this.gameOverTextStyle).setOrigin(0.5)
         // make gameOverText interactive 
         this.gameOverText.setInteractive({ useHandCursor: true })
-        this.gameOverText.on('pointerdown', () => this.scene.start('gameScene'))
+        this.gameOverText.on('pointerdown', () => this.scene.start('gameScene', this.score = 0, this.sound.play('button')))
       }.bind(this))
     }
 
 
   update (time, delta) {
     // play backround music on update (commented out because it slowed down the game too much)
-    // const audioObj = new Audio("/assets/backgroundMusic.mp3")
+    // const audioObj = new Audio("/sounds/backgroundMusic.mp3")
     // audioObj.play()
     
     // called 60 times a second
