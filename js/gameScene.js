@@ -106,18 +106,16 @@ class GameScene extends Phaser.Scene {
       this.createAlien()
       this.createAlien()
       // end game if 50 points is reached
-    if (this.score >= 50) {
+    if (this.score >= 50.0) {
       // pause physics to stop new enemies from spawning
       this.physics.pause()
       // play win sound
       this.sound.play('win')
-      // set score back to 0
-      this.score = this.score * 0
       // display and style win text
       this.gameWinText = this.add.text(1920 / 2, 1080 / 2, 'You won!\nClick to play again.', this.gameWinTextStyle).setOrigin(0.5)
       // make game win text clickable to take you back to gameScene
       this.gameWinText.setInteractive({ useHandCursor: true })
-      this.gameWinText.on('pointerdown', () => this.scene.start('gameScene')) 
+      this.gameWinText.on('pointerdown', () => this.scene.start('gameScene', this.score = 0))
     }
       }.bind(this))
     
