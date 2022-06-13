@@ -28,6 +28,8 @@ class MenuScene extends Phaser.Scene {
     // load images
     this.load.image('menuSceneBackground', 'images/cavern.png')
     this.load.image('startButton', 'images/start.png')
+    this.load.image('singlePlayer', 'images/single_player.png')
+    this.load.image('twoPlayer', 'images/two_player.png')
     this.load.image('instructionButton', 'images/instruction.png')
     // load sounds
     this.load.audio('button', 'sounds/buttonPress.mp3')
@@ -38,10 +40,14 @@ class MenuScene extends Phaser.Scene {
     this.menuSceneBackgroundImage = this.add.sprite(0, 0, 'menuSceneBackground').setScale(1.75)
     this.menuSceneBackgroundImage.x = 1920 / 2
     this.menuSceneBackgroundImage.y = 1080 / 2
-    // create start button
+    // create duo start button
     this.startButton = this.add.sprite(1920 / 2, (1080 / 2) + 1, 'startButton').setScale(0.50)
     this.startButton.setInteractive({ useHandCursor: true })
     this.startButton.on('pointerdown', () => this.clickButton())
+    // create single start button
+    this.startButton1 = this.add.sprite(1920 / 2, (1080 / 2) + 1, 'startButton1').setScale(0.50)
+    this.startButton1.setInteractive({ useHandCursor: true })
+    this.startButton1.on('pointerdown', () => this.clickButton2())
     // create instruction button
     this.instructionButton = this.add.sprite(350, (1080 / 7) + 1, 'instructionButton').setScale(0.50)
     this.instructionButton.setInteractive({ useHandCursor: true })
@@ -53,6 +59,11 @@ class MenuScene extends Phaser.Scene {
   // switch to gameScene on start button clicked
   clickButton () {
     this.scene.start('gameScene')
+    this.sound.play('button')
+  }
+    // switch to gameSceneSingle on start single button clicked
+  clickButton2 () {
+    this.scene.start('gameSceneSingle')
     this.sound.play('button')
   }
   // switch to instructionScene on instruction button clicked
