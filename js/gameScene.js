@@ -19,7 +19,7 @@ class GameScene extends Phaser.Scene {
     alienXVelocity *= Math.round(Math.random()) ? 1 : -1
     // physics for sprite
     const anAlien = this.physics.add.sprite(alienXLocation, -100, 'alien').setScale(0.31)
-    // alien spaceship move in difefrent directions
+    // alien spaceship move in different directions
     anAlien.body.velocity.y = 200
     anAlien.body.velocity.x = alienXVelocity
     this.alienGroup.add(anAlien)
@@ -62,16 +62,26 @@ class GameScene extends Phaser.Scene {
     console.log('Game Scene')
 
     // images
+    //background image
     this.load.image('basicCave', 'images/basic-cave.png')
+    //image for ship
     this.load.image('ship', 'images/cannon.png')
+    //image for ship1
     this.load.image('ship1', 'images/cannon1.png')
+    //image for missile
     this.load.image('missile', 'images/cheese-projectile.png')
+    //image for alien
     this.load.image('alien', 'images/hungry_ant.png')
     //sound files
+    //laser sound effect 
     this.load.audio('laser', 'sounds/cannon_sound.wav')
+    //explosion sound effect
     this.load.audio('explosion', 'sounds/crunch.mp3')
+    //death sound effect
     this.load.audio('death', 'sounds/death.wav')
+    //button sound effect
     this.load.audio('button', 'sounds/buttonPress.mp3')
+    //win sound effect
     this.load.audio('win', 'sounds/win.mp3')
   }
   
