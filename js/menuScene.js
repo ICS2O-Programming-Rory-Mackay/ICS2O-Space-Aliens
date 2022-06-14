@@ -14,6 +14,8 @@ class MenuScene extends Phaser.Scene {
   this.menuSceneBackgroundImage = null
   // creating variable for start button
   this.startButton = null
+  // creating variable for start button
+  this.startButton1 = null
   // creating variable for instruction button
   this.instructionButton = null
   }
@@ -27,7 +29,6 @@ class MenuScene extends Phaser.Scene {
     console.log('Menu Scene')
     // load images
     this.load.image('menuSceneBackground', 'images/cavern.png')
-    this.load.image('startButton', 'images/start.png')
     this.load.image('singlePlayer', 'images/single_player.png')
     this.load.image('twoPlayer', 'images/two_player.png')
     this.load.image('instructionButton', 'images/instruction.png')
@@ -41,11 +42,11 @@ class MenuScene extends Phaser.Scene {
     this.menuSceneBackgroundImage.x = 1920 / 2
     this.menuSceneBackgroundImage.y = 1080 / 2
     // create duo start button
-    this.startButton = this.add.sprite(1920 / 2, (1080 / 2) + 1, 'startButton').setScale(0.50)
+    this.startButton = this.add.sprite(1100, (1080 / 2) + 1, 'twoPlayer').setScale(1.1)
     this.startButton.setInteractive({ useHandCursor: true })
     this.startButton.on('pointerdown', () => this.clickButton())
     // create single start button
-    this.startButton1 = this.add.sprite(1920 / 2, (1080 / 2) + 1, 'startButton1').setScale(0.50)
+    this.startButton1 = this.add.sprite(700, (1080 / 2) + 1, 'singlePlayer').setScale(1.1)
     this.startButton1.setInteractive({ useHandCursor: true })
     this.startButton1.on('pointerdown', () => this.clickButton2())
     // create instruction button

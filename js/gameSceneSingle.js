@@ -33,8 +33,6 @@ class GameSceneSingle extends Phaser.Scene {
     this.ship = null
     // cannon projectile variable
     this.fireMissile = false
-    // cannon1 projectile variable
-    this.fireMissile1 = false
     // score variable
     this.score = 0
     // score text variable
@@ -49,7 +47,6 @@ class GameSceneSingle extends Phaser.Scene {
     this.gameWinText = null
     // game over text variable styling
     this.gameWinTextStyle = { font: '65px Arial', fill: '#ff0000', align: 'center' }
-
   }
 // set game scene background colour
   init (data) {
@@ -122,7 +119,6 @@ class GameSceneSingle extends Phaser.Scene {
       this.gameWinText.on('pointerdown', () => this.scene.start('gameSceneSingle', this.score = 0, this.sound.play('button')))
     }
       }.bind(this))
-  }
     
       // collisions between cannon and ants
       this.physics.add.collider(this.ship, this.alienGroup, function (shipCollide, alienCollide) {
@@ -139,6 +135,7 @@ class GameSceneSingle extends Phaser.Scene {
         this.gameOverText.setInteractive({ useHandCursor: true })
         this.gameOverText.on('pointerdown', () => this.scene.start('gameSceneSingle', this.score = 0, this.sound.play('button')))
       }.bind(this))
+  }
 
   update (time, delta) {
     // play backround music on update (commented out because it slowed down the game too much)
