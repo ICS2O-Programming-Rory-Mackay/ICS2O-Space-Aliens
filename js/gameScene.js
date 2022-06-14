@@ -27,6 +27,8 @@ class GameScene extends Phaser.Scene {
   constructor () {
     super({ key: 'gameScene' })
     // creating variables
+    // creating variable for home button
+    this.homeButton = null
     // backround variable
     this.background = null
     // ship variable
@@ -51,7 +53,6 @@ class GameScene extends Phaser.Scene {
     this.gameWinText = null
     // game over text variable styling
     this.gameWinTextStyle = { font: '65px Arial', fill: '#ff0000', align: 'center' }
-
   }
 // set game scene background colour
   init (data) {
@@ -72,6 +73,9 @@ class GameScene extends Phaser.Scene {
     this.load.image('missile', 'images/cheese-projectile.png')
     //image for alien
     this.load.image('alien', 'images/hungry_ant.png')
+    //image for home button
+    this.load.image('homeButton', 'images/home.png')
+
     //sound files
     //laser sound effect 
     this.load.audio('laser', 'sounds/cannon_sound.wav')
@@ -91,17 +95,19 @@ class GameScene extends Phaser.Scene {
     this.background.setOrigin(0, 0)
     // show score on screen
     this.scoreText = this.add.text(10, 10, 'Score: ' + this.score.toString(), this.scoreTextStyle)
+    // create home button
+    this.homeButton = this.add.sprite(1750, (1080 / 7) + 1, 'homeButton').setScale(0.50)
+    this.homeButton.setInteractive({ useHandCursor: true })
+    this.homeButton.on('pointerdown', () => this.scene.start('menuScene', this.score = 0, this.sound.play('button')))
     // physics and scaling for ship
     this.ship = this.physics.add.sprite(1920 / 2, 1080 - 100, 'ship').setScale(0.75)
     // physics and scaling for ship1
     this.ship1 = this.physics.add.sprite(1920 / 2, 1080 - 100, 'ship1').setScale(0.75)
     // create a group for the missiles and add physics
     this.missileGroup = this.physics.add.group()
-
     // create a group for the ants
     this.alienGroup = this.add.group()
     this.createAlien()
-
     // collisions between cheese projectiles and ants
     this.physics.add.collider(this.missileGroup, this.alienGroup, function (missileCollide, alienCollide) {
       // destroy missile and alien on contact
@@ -115,8 +121,8 @@ class GameScene extends Phaser.Scene {
       // create two more ants for each ant hit
       this.createAlien()
       this.createAlien()
-      // end game if 50 points is reached
-    if (this.score >= 50.0) {
+      // end game if 100 points is reached
+    if (this.score >= 100.0) {
       // pause physics to stop new enemies from spawning
       this.physics.pause()
       // play win sound
@@ -284,6 +290,10 @@ class GameScene extends Phaser.Scene {
         item.destroy()
       }
     })
+  }
+  // switch to menuScene on home button clicked
+  clickButton1 () {
+    this.scene.start('menuScene')
   }
 }
 

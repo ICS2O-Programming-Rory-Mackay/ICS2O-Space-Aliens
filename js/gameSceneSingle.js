@@ -27,6 +27,8 @@ class GameSceneSingle extends Phaser.Scene {
   constructor () {
     super({ key: 'gameSceneSingle' })
     // creating variables
+    // creating variable for home button
+    this.homeButton = null
     // backround variable
     this.background = null
     // ship variable
@@ -65,6 +67,8 @@ class GameSceneSingle extends Phaser.Scene {
     this.load.image('missile', 'images/cheese-projectile.png')
     //image for alien
     this.load.image('alien', 'images/hungry_ant.png')
+    //image for home button
+    this.load.image('homeButton', 'images/home.png')
     //sound files
     //laser sound effect 
     this.load.audio('laser', 'sounds/cannon_sound.wav')
@@ -84,6 +88,10 @@ class GameSceneSingle extends Phaser.Scene {
     this.background.setOrigin(0, 0)
     // show score on screen
     this.scoreText = this.add.text(10, 10, 'Score: ' + this.score.toString(), this.scoreTextStyle)
+    // create home button
+    this.homeButton = this.add.sprite(1750, (1080 / 7) + 1, 'homeButton').setScale(0.50)
+    this.homeButton.setInteractive({ useHandCursor: true })
+    this.homeButton.on('pointerdown', () => this.scene.start('menuScene', this.score = 0, this.sound.play('button')))
     // physics and scaling for ship
     this.ship = this.physics.add.sprite(1920 / 2, 1080 - 100, 'ship').setScale(0.75)
     // create a group for the missiles and add physics
@@ -201,6 +209,10 @@ class GameSceneSingle extends Phaser.Scene {
         item.destroy()
       }
     })
+  }
+  // switch to menuScene on home button clicked
+  clickButton1 () {
+    this.scene.start('menuScene')
   }
 }
 
