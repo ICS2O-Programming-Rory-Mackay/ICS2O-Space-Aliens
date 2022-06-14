@@ -42,11 +42,11 @@ class MenuScene extends Phaser.Scene {
     this.menuSceneBackgroundImage.x = 1920 / 2
     this.menuSceneBackgroundImage.y = 1080 / 2
     // create duo start button
-    this.startButton = this.add.sprite(1100, (1080 / 2) + 1, 'twoPlayer').setScale(1.1)
+    this.startButton = this.add.sprite(1170, (1080 / 2) + 1, 'twoPlayer').setScale(1.1)
     this.startButton.setInteractive({ useHandCursor: true })
     this.startButton.on('pointerdown', () => this.clickButton())
     // create single start button
-    this.startButton1 = this.add.sprite(700, (1080 / 2) + 1, 'singlePlayer').setScale(1.1)
+    this.startButton1 = this.add.sprite(750, (1080 / 2) + 1, 'singlePlayer').setScale(1.1)
     this.startButton1.setInteractive({ useHandCursor: true })
     this.startButton1.on('pointerdown', () => this.clickButton2())
     // create instruction button

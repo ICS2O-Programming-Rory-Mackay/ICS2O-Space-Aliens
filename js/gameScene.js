@@ -13,6 +13,8 @@ class GameScene extends Phaser.Scene {
   createAlien() {
     // get a number between 1 and 1920
     const alienXLocation = Math.floor(Math.random() * 1920) + 1
+    // get a number between 0 and -10
+    const alienYLocation = Math.floor(Math.random() * -10) + 0
     // get a number between 1 and 50
     let alienXVelocity = Math.floor(Math.random() * 50) + 1
     // add minus sign in 50% of cases
@@ -108,6 +110,7 @@ class GameScene extends Phaser.Scene {
     // create a group for the ants
     this.alienGroup = this.add.group()
     this.createAlien()
+    
     // collisions between cheese projectiles and ants
     this.physics.add.collider(this.missileGroup, this.alienGroup, function (missileCollide, alienCollide) {
       // destroy missile and alien on contact
@@ -154,7 +157,7 @@ class GameScene extends Phaser.Scene {
       this.physics.add.collider(this.ship1, this.alienGroup, function (ship1Collide, alienCollide) {
         // death sound on contact
         this.sound.play('death')
-        // pause physics to stop new enemies fro spawning
+        // pause physics to stop new enemies from spawning
         this.physics.pause()
         // destroy cannon on contact with ant
         alienCollide.destroy()
@@ -288,6 +291,14 @@ class GameScene extends Phaser.Scene {
       item.y = item.y - 15
       if (item.y < 0) {
         item.destroy()
+      }
+    })
+
+    this.alienGroup.children.each(function (item) {
+      if (item.y > 1080 || item.x < 0 || item.x > 1920) {
+        item.y = -5
+        const alienXLocationCord = Math.floor(Math.random() * 1920) + 1
+        item.x = alienXLocationCord
       }
     })
   }

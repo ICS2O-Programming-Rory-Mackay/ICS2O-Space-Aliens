@@ -209,6 +209,13 @@ class GameSceneSingle extends Phaser.Scene {
         item.destroy()
       }
     })
+    this.alienGroup.children.each(function (item) {
+      if (item.y > 1080 || item.x < 0 || item.x > 1920) {
+        item.y = -5
+        const alienXLocationCord = Math.floor(Math.random() * 1920) + 1
+        item.x = alienXLocationCord
+      }
+    })
   }
   // switch to menuScene on home button clicked
   clickButton1 () {
