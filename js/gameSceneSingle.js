@@ -135,7 +135,7 @@ class GameSceneSingle extends Phaser.Scene {
         this.gameOverText.setInteractive({ useHandCursor: true })
         this.gameOverText.on('pointerdown', () => this.scene.start('gameSceneSingle', this.score = 0, this.sound.play('button')))
       }.bind(this))
-  }
+    }
 
   update (time, delta) {
     // play backround music on update (commented out because it slowed down the game too much)
