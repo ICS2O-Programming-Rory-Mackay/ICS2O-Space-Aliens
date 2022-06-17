@@ -293,7 +293,7 @@ class GameScene extends Phaser.Scene {
         item.destroy()
       }
     })
-
+    // reset alien position if they go off screen
     this.alienGroup.children.each(function (item) {
       if (item.y > 1080 || item.x < 0 || item.x > 1920) {
         item.y = -5
